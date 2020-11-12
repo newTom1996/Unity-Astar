@@ -10,14 +10,15 @@ public enum NodeType
     Start = 1,
     End = 2,
     Obstacle = 3,
+    Path = 4,
 }
 public class AstarManager : MonoBehaviour
 {
     #region Config
     public GameObject NodePrefab;
     public Camera MainCam;
-    public int Width = 20;
-    public int Height = 20;
+    public int Width = 10;
+    public int Height = 10;
     #endregion
     
     #region C++
@@ -144,7 +145,12 @@ public class AstarManager : MonoBehaviour
             for (int j = 0; j < Height; j++)
             {
                 Node curNode = map[i, j];
-                mapInt[i, j] = (int)curNode.CurType;
+                mapInt[Height - j - 1, i] = (int) curNode.CurType;
+                // //TODO 测试
+                // if (curNode.CurType == NodeType.Obstacle)
+                // {
+                //     Debug.Log("障碍（" + (Height - j - 1) + "," + (i) + "）");
+                // }
             }
         }
 
@@ -160,23 +166,34 @@ public class AstarManager : MonoBehaviour
                 CalculatePath(farr,Width, Height, ref resultX[0], ref resultY[0]);
             }
         }
-
+        
         bool hasRecordZero = false;
         for (int i = 0; i < resultX.Length; i++)
         {
+            //TODO 测试
+            if (resultX[i] == 0 && resultY[i] == 0)
+            {
+                continue;
+            }
+            //Debug.Log("坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
+            // int xPos = resultY[i];
+            // int yPos = Height - 1 - resultX[i];
+            int xPos = resultY[i];
+            int yPos = Height - 1 - resultX[i];
             if (resultX[i] == 0 && resultY[i] == 0)
             {
                 if (hasRecordZero)
                 {
                     continue;
                 }
-                map[resultX[i],resultY[i]].SetToPathNode();
+                //map[resultX[i],resultY[i]].SetToPathNode();
+                //Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
                 hasRecordZero = true;
             }
             else
             {
-                //Debug.Log("障碍的坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
-                map[resultX[i],resultY[i]].SetToPathNode();
+                Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
+                map[xPos,yPos].SetToPathNode();
             }
         }
     }

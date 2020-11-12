@@ -16,10 +16,10 @@ public class Node : MonoBehaviour
 
     public void SwitchType(NodeType nodeType)
     {
-        if (CurType == nodeType)
-        {
-            return;
-        }
+        // if (CurType == nodeType)
+        // {
+        //     return;
+        // }
         switch (nodeType)
         {
             case NodeType.Normal:
@@ -34,6 +34,9 @@ public class Node : MonoBehaviour
             case NodeType.Obstacle:
                 spriteRenderer.color = Color.black;
                 break;
+            case NodeType.Path:
+                spriteRenderer.color = Color.yellow;
+                break;
         }
 
         CurType = nodeType;
@@ -41,7 +44,7 @@ public class Node : MonoBehaviour
 
     public void SetToPathNode()
     {
-        spriteRenderer.color = Color.yellow;
+        SwitchType(NodeType.Path);
     }
 
     public void OnUpdateType(Vector3 mousePos, NodeType nodeType)

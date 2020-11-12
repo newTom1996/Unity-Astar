@@ -2,10 +2,6 @@
 <module type="RIDER_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../.." />
-    <content url="file://$MODULE_DIR$/../../../../../../各个版本的Unity/2019.4.4f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.2d.sprite/Editor" />
-    <content url="file://$MODULE_DIR$/../../../../../../各个版本的Unity/2019.4.4f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.2d.tilemap/Editor" />
-    <content url="file://$MODULE_DIR$/../../../../../../各个版本的Unity/2019.4.4f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Editor" />
-    <content url="file://$MODULE_DIR$/../../../../../../各个版本的Unity/2019.4.4f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
