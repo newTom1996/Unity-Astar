@@ -153,24 +153,36 @@ public class AstarManager : MonoBehaviour
                 // }
             }
         }
-
+        int row = mapInt.GetUpperBound(0) + 1;
+        int col = mapInt.GetUpperBound(1) + 1;
         unsafe
         {
             fixed (int* fp = mapInt)
             {
-                int*[] farr = new int*[Width];
-                for (int i = 0; i < Width; i++)
+                int*[] farr = new int*[row];
+                for (int i = 0; i < row; i++)
                 {
-                    farr[i] = fp + i * Height;
+                    farr[i] = fp + i * col;
                 }
-                CalculatePath(farr,Width, Height, ref resultX[0], ref resultY[0]);
+                CalculatePath(farr,row, col, ref resultX[0], ref resultY[0]);
             }
         }
+        // unsafe
+        // {
+        //     fixed (int* fp = mapInt)
+        //     {
+        //         int*[] farr = new int*[Width];
+        //         for (int i = 0; i < Width; i++)
+        //         {
+        //             farr[i] = fp + i * Height;
+        //         }
+        //         CalculatePath(farr,Width, Height, ref resultX[0], ref resultY[0]);
+        //     }
+        // }
         
         bool hasRecordZero = false;
         for (int i = 0; i < resultX.Length; i++)
         {
-            //TODO 测试
             if (resultX[i] == 0 && resultY[i] == 0)
             {
                 continue;
