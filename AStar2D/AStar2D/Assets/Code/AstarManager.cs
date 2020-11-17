@@ -190,6 +190,7 @@ public class AstarManager : MonoBehaviour
             //Debug.Log("坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
             // int xPos = resultY[i];
             // int yPos = Height - 1 - resultX[i];
+            Debug.Log("坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
             int xPos = resultY[i];
             int yPos = Height - 1 - resultX[i];
             if (resultX[i] == 0 && resultY[i] == 0)
@@ -204,7 +205,7 @@ public class AstarManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
+                //Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
                 map[xPos,yPos].SetToPathNode();
             }
         }
