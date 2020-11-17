@@ -57,6 +57,9 @@ public class AstarManager : MonoBehaviour
     /// 路径结果列表纵坐标
     /// </summary>
     private int[] resultY;
+
+    private Node startNode;
+    private Node endNode;
     
     private static AstarManager instacne;
     public static AstarManager Instance
@@ -146,11 +149,6 @@ public class AstarManager : MonoBehaviour
             {
                 Node curNode = map[i, j];
                 mapInt[Height - j - 1, i] = (int) curNode.CurType;
-                // //TODO 测试
-                // if (curNode.CurType == NodeType.Obstacle)
-                // {
-                //     Debug.Log("障碍（" + (Height - j - 1) + "," + (i) + "）");
-                // }
             }
         }
         int row = mapInt.GetUpperBound(0) + 1;
@@ -167,19 +165,7 @@ public class AstarManager : MonoBehaviour
                 CalculatePath(farr,row, col, ref resultX[0], ref resultY[0]);
             }
         }
-        // unsafe
-        // {
-        //     fixed (int* fp = mapInt)
-        //     {
-        //         int*[] farr = new int*[Width];
-        //         for (int i = 0; i < Width; i++)
-        //         {
-        //             farr[i] = fp + i * Height;
-        //         }
-        //         CalculatePath(farr,Width, Height, ref resultX[0], ref resultY[0]);
-        //     }
-        // }
-        
+
         bool hasRecordZero = false;
         for (int i = 0; i < resultX.Length; i++)
         {
@@ -187,10 +173,6 @@ public class AstarManager : MonoBehaviour
             {
                 continue;
             }
-            //Debug.Log("坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
-            // int xPos = resultY[i];
-            // int yPos = Height - 1 - resultX[i];
-            Debug.Log("坐标" + "(" + resultX[i] + "," + resultY[i] + ")");
             int xPos = resultY[i];
             int yPos = Height - 1 - resultX[i];
             if (resultX[i] == 0 && resultY[i] == 0)
@@ -199,13 +181,10 @@ public class AstarManager : MonoBehaviour
                 {
                     continue;
                 }
-                //map[resultX[i],resultY[i]].SetToPathNode();
-                //Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
                 hasRecordZero = true;
             }
             else
             {
-                //Debug.Log("坐标" + "(" + xPos + "," + yPos + ")");
                 map[xPos,yPos].SetToPathNode();
             }
         }
@@ -220,6 +199,15 @@ public class AstarManager : MonoBehaviour
     {
         foreach (var node in map)
         {
+            if (nodeType == NodeType.End)
+            {
+                endNode = node;
+            }
+
+            if (nodeType == NodeType.Start)
+            {
+                startNode = node;
+            }
             node.OnUpdateType(mousePos,nodeType);
         }
     }
